@@ -1,0 +1,45 @@
+h2 {
+    color: blueviolet;
+}
+nav {
+    width: 20%;
+    height: 5vh;
+    background-color: rgb(233, 233, 233);
+    padding-top: 7px;
+    padding-left: 20px;
+}
+form {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+#username {
+    height: 22px;
+}
+nav a{
+    padding-right: 20px;
+    width: 30px;
+    height: 30px;
+    color: rgb(255, 255, 255); 
+    text-decoration: none;
+    transition: 1s;
+}
+a:hover {
+    color: rgb(31, 31, 31);
+}
+button {
+    font-size: 12px;
+    padding: 7px;
+    background-color: black;
+    color: #fff;
+    border-radius: 10px;
+    border: 0px;
+}
+button:hover {
+    background-color: rgb(129, 129, 129);
+}
+#list {
+    margin: 20px;
+}
+span {
+    padding-right: 10px;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10</title>
+</head>
+<body>
+    <script>
+      let form = document.createElement("form");
+      document.body.append(form);
+      // 입력창
+      let input = document.createElement("input");
+      form.append(input);
+      // 입력 버튼
+      let btn = document.createElement("button");
+      btn.textContent = "입력";
+      form.append(btn);
+      let result = document.createElement("div");
+      document.body.append(result);
+
+
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // let tree = '';
+
+        // const num = input.value;
+        // for(let i = 1; i<num; i++ ){
+        //     for(let j = 1; j < num; i--){
+        //         star += '';
+        //     }
+        //     for(let k=1; k=i*2-1; k++){
+        //         star += '*';
+        //     }
+        //     tree += star + '/n'
+        // }
+
+        const num = input.value;
+
+        for (let i = 0; i < num; i++) {
+        for (let j = num - 1; j > i; j--) {
+            document.write("&nbsp");
+        }
+        for (let j = 0; j < 2 * i + 1; j++) {
+            document.write("*");
+        }
+        document.write("<br>");
+        }
+
+
+       
+    });
+    </script>
+</body>
+</html>

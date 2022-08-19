@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제2</title>
+</head>
+<body>
+    <script>
+      let form = document.createElement("form");
+      document.body.append(form);
+      // 입력창
+      let input = document.createElement("input");
+      form.append(input);
+      // 입력 버튼
+      let btn = document.createElement("button");
+      btn.textContent = "입력";
+      form.append(btn);
+      let result = document.createElement("div");
+      document.body.append(result);
+
+
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+
+        // let num = input.value;
+
+        // function keyy(num) {
+        //     let Number = 2;
+
+        //     while (num > Number){
+        //         if ( num % Number === 0){
+        //             return "No";
+        //         } else {
+        //             Number++
+        //         }
+        //     }
+        //     return "Yes";
+        // }
+
+        // console.log(keyy(num));
+
+
+        let num = input.value;
+        let ansewer = 'Yes';
+        for(let i =2; i<num; i++){
+            if(num % i === 0){
+                ansewer='No'
+                break;
+            }
+        }
+        console.log(ansewer);
+        
+      });
+
+    </script>
+    
+</body>
+</html>
