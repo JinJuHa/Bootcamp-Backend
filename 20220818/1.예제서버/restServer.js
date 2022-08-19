@@ -2,6 +2,34 @@ const http = require('http');
 const fs = require('fs').promises;
 //const getIp = require('request-ip'); // ip 출력용
 
+
+const url = require('url');
+const qs = require('querystring');
+//let idd = 0;
+
+const parseCookies = (cookie = '') =>
+  cookie
+    .split(';')
+    .map(v => v.split('='))
+    .reduce((acc, [k, v]) => {
+      acc[k.trim()] = decodeURIComponent(v);
+      return acc;
+    }, {});
+
+const session = {};
+
+
+function findkeyinsession(cookiekey){
+  for(key in session){
+    if(key === cookiekey){
+      return true;
+    }
+  }
+  return false;
+}
+
+
+
 const users = {}; // 데이터 저장용
 let idd = 0; //아이디 초기값
 
@@ -9,6 +37,42 @@ let idd = 0; //아이디 초기값
 http
   .createServer(async (req, res) => {
     // 1. 서버를 만들고 요청( req: 요청 , res: 응답)
+    
+    if (req.url.startsWith('/login')) {
+      const { query } = url.parse(req.url);
+      const { name } = qs.parse(query);
+      const expires = new Date();
+      expires.setMinutes(expires.getMinutes() + 5);
+      const uniqueInt = '1';
+      //const uniqueInt = idd++;
+      //const uniqueInt = Date.now();
+      session[uniqueInt] = {
+        name,
+        expires,
+      };
+      res.writeHead(302, {
+        Location: '/',
+        'Set-Cookie': `session=${uniqueInt}; Expires=${expires.toGMTString()}; HttpOnly; Path=/`,
+      });
+      res.end();
+    // 세션쿠키가 존재하고, 만료 기간이 지나지 않았다면
+    } else if (cookies.session && findkeyinsession(cookies.session) &&  session[cookies.session].expires > new Date()) {
+      const data = await fs.readFile("./fo/restFront.html")//
+      res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+      return res.end(data);
+    } else {
+      try {
+        const data = await fs.readFile('./login.html');
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        res.end(data);
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+        res.end(err.message);
+      }
+    }
+
+    
+    const cookies = parseCookies(req.headers.cookie);//
   try {
     if (req.method === 'GET') {
       // 2. 서버를 만들었으면 요청을 해야 응답이 온다 
